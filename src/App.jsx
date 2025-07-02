@@ -5,7 +5,6 @@ import PieChartKilos from "@/components/PieChartKilos.jsx";
 import BarChartFamilia from "@/components/BarChartFamilia";
 import TablaSalidas from "@/components/TablaSalidas";
 import StatsPanel from "@/components/StatsPanel";
-
 import "./app.css";
 
 function App() {
