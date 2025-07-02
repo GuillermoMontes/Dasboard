@@ -2,7 +2,7 @@ import {
   RadialBarChart,
   RadialBar,
   PolarAngleAxis,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
 
 function RadialChart({ value }) {
@@ -10,13 +10,16 @@ function RadialChart({ value }) {
     {
       name: "Cumplimiento",
       porcentaje: value,
-      fill: "var(--primary)", 
+      fill: "#208d60", // Verde oscuro
     },
   ];
 
   return (
-    <div className="bg-background rounded-xl p-4 shadow-md w-full h-[220px] max-w-sm mx-auto">
-      <h3 className="text-sm font-medium text-muted-foreground mb-2 text-center">Cumplimiento</h3>
+    <div className="bg-white rounded-xl p-4 shadow-md w-full h-[220px] max-w-sm mx-auto border border-gray-200">
+      <h3 className="text-sm font-semibold text-gray-600 mb-2 text-center">
+        Cumplimiento
+      </h3>
+
       <ResponsiveContainer width="100%" height={140}>
         <RadialBarChart
           innerRadius="70%"
@@ -41,7 +44,10 @@ function RadialChart({ value }) {
           />
         </RadialBarChart>
       </ResponsiveContainer>
-      <p className="text-center text-2xl font-bold text-primary mt-2">{value}%</p>
+
+      <p className="text-center text-2xl font-bold text-[#208d60] mt-2">
+        {value}%
+      </p>
     </div>
   );
 }

@@ -85,99 +85,74 @@ function App() {
   const cumplimiento = totalProg ? Math.round((totalUni / totalProg) * 100) : 0;
 
   return (
-    <>
-      <div data-theme="dark" className="min-h-screen bg-background text-foreground">
-      <div className=" px-4 py-2 grid grid-cols-1 md:grid-cols-5 gap-2 items-start">
-        <StatsPanel
-          data={{
-            Programado: totalProg,
-            "Unidades Ingresadas": totalUni,
-          }}
-          active={activeStat}
-          onSelect={setActiveStat}
-        />
-        <div className="col-span-1">
-          <RadialChart value={cumplimiento} />
-        </div>
-        <div className="col-span-1">
-          <PieChartKilos totalKg={totalKg} />
-        </div>
+  <div className="min-h-screen bg-white text-gray-900">
+    <div className="px-4 py-2 grid grid-cols-1 md:grid-cols-5 gap-2 items-start">
+      <StatsPanel
+        data={{
+          Programado: totalProg,
+          "Unidades Ingresadas": totalUni,
+        }}
+        active={activeStat}
+        onSelect={setActiveStat}
+      />
+      <div className="col-span-1">
+        <RadialChart value={cumplimiento} />
       </div>
+      <div className="col-span-1">
+        <PieChartKilos totalKg={totalKg} />
+      </div>
+    </div>
 
-      {/* Filtros */}
-      <div className="flex gap-1">
-        <div className="mb-4 px-6">
-          <label className="block text-sm font-medium text-muted-foreground mb-1">
-            Filtrar por PlanNro:
+    {/* Filtros */}
+    <div className="flex gap-1">
+      {[
+        {
+          label: "Filtrar por PlanNro:",
+          value: planSeleccionado,
+          onChange: setPlanSeleccionado,
+          options: [...new Set(productos.salidas.map((s) => s.PlanNro))].sort((a, b) => a - b),
+          renderOption: (val) => `Plan ${val}`,
+        },
+        {
+          label: "Filtrar por Tropa:",
+          value: tropaSeleccionada,
+          onChange: setTropaSeleccionada,
+          options: [...new Set(productos.salidas.map((s) => s.Tropa))].sort((a, b) => a - b),
+          renderOption: (val) => `Tropa ${val}`,
+        },
+        {
+          label: "Filtrar por Destino:",
+          value: destinoSeleccionado,
+          onChange: setDestinoSeleccionado,
+          options: [...new Set(productos.salidas.map((s) => s.Destino))].sort(),
+          renderOption: (val) => val,
+        },
+      ].map(({ label, value, onChange, options, renderOption }, idx) => (
+        <div key={idx} className="mb-4 px-6">
+          <label className="block text-sm font-medium text-gray-500 mb-1">
+            {label}
           </label>
           <select
-            value={planSeleccionado}
-            onChange={(e) => setPlanSeleccionado(e.target.value)}
-            className="w-full max-w-sm border border-border bg-background text-foreground rounded px-3 py-2 text-sm"
-
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            className="w-full max-w-sm border border-gray-300 bg-white text-gray-900 rounded px-3 py-2 text-sm"
           >
             <option value="">Todos</option>
-            {[...new Set(productos.salidas.map((s) => s.PlanNro))]
-              .sort((a, b) => a - b)
-              .map((plan) => (
-                <option key={plan} value={String(plan)}>
-                  Plan {plan}
-                </option>
-              ))}
+            {options.map((opt) => (
+              <option key={opt} value={String(opt)}>
+                {renderOption(opt)}
+              </option>
+            ))}
           </select>
         </div>
+      ))}
+    </div>
 
-        <div className="mb-4 px-6">
-          <label className="block text-sm font-medium text-muted-foreground mb-1">
-            Filtrar por Tropa:
-          </label>
-          <select
-            value={tropaSeleccionada}
-            onChange={(e) => setTropaSeleccionada(e.target.value)}
-            className="w-full max-w-sm border border-border bg-background text-foreground rounded px-3 py-2 text-sm"
+    <BarChartFamilia data={dataFamilias} />
+    <TablaSalidas data={salidasFiltradas} />
+  </div>
+);
 
-          >
-            <option value="">Todas</option>
-            {[...new Set(productos.salidas.map((s) => s.Tropa))]
-              .sort((a, b) => a - b)
-              .map((tropa) => (
-                <option key={tropa} value={String(tropa)}>
-                  Tropa {tropa}
-                </option>
-              ))}
-          </select>
-        </div>
-
-        <div className="mb-4 px-6">
-          <label className="block text-sm font-medium text-muted-foreground mb-1">
-            Filtrar por Destino:
-          </label>
-          <select
-            value={destinoSeleccionado}
-            onChange={(e) => setDestinoSeleccionado(e.target.value)}
-            className="w-full max-w-sm border border-border bg-background text-foreground rounded px-3 py-2 text-sm"
-
-          >
-            <option value="">Todos</option>
-            {[...new Set(productos.salidas.map((s) => s.Destino))]
-              .sort()
-              .map((destino) => (
-                <option key={destino} value={destino}>
-                  {destino}
-                </option>
-              ))}
-          </select>
-        </div>
-      </div>
-
-      
-      <BarChartFamilia data={dataFamilias} />
-
-      
-      <TablaSalidas data={salidasFiltradas} />
-      </div>
-    </>
-  );
 }
 
 export default App;

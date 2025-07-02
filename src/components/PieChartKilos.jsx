@@ -5,27 +5,26 @@ function PieChartKilos({ totalKg }) {
     {
       name: "Ingresado",
       value: totalKg,
-      fill: "var(--primary)" , 
+      fill: "#208d60", // Verde oscuro
     },
     {
       name: "Restante",
       value: totalKg * 0.2,
-      fill: "var(--muted)", 
+      fill: "#e5f5eb", // Verde claro suave
     },
   ];
 
   return (
-    <div className="bg-background rounded-xl p-4 shadow-md w-full h-[220px] max-w-sm mx-auto relative">
-      <h3 className="text-sm font-medium text-muted-foreground mb-2 text-center">
-
+    <div className="bg-white rounded-xl p-4 shadow-md w-full h-[220px] max-w-sm mx-auto relative border border-gray-200">
+      <h3 className="text-sm font-semibold text-gray-600 mb-2 text-center">
         Total Kilos
       </h3>
-      
+
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-center">
-        <p className="text-primary text-2xl font-bold">
+        <p className="text-[#208d60] text-2xl font-bold">
           {totalKg.toLocaleString()} KG
         </p>
-        <p className="text-muted-foreground text-sm -mt-1">Ingresados</p>
+        <p className="text-gray-500 text-sm -mt-1">Ingresados</p>
       </div>
 
       <ResponsiveContainer width="100%" height={140}>
