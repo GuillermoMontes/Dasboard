@@ -1,26 +1,29 @@
 import { PieChart, Pie, ResponsiveContainer } from "recharts";
 
 function PieChartKilos({ totalKg }) {
+  const maxKg = totalKg * 1.2; // Valor de referencia para el total
+  const percentage = totalKg / maxKg;
+
   const data = [
     {
       name: "Ingresado",
       value: totalKg,
-      fill: "#208d60", // Verde oscuro
+      fill: "#208d60", // Verde
     },
     {
       name: "Restante",
-      value: totalKg * 0.2,
-      fill: "#e5f5eb", // Verde claro suave
+      value: maxKg - totalKg,
+      fill: "#e5f5eb", // Verde claro
     },
   ];
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-md w-full h-[220px] max-w-sm mx-auto relative border border-gray-200">
+    <div className="bg-white rounded-xl p-4 shadow-md w-full h-[220px] max-w-sm mx-auto relative  ">
       <h3 className="text-sm font-semibold text-gray-600 mb-2 text-center">
         Total Kilos
       </h3>
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-center">
+      <div className="absolute top-[95px] left-1/2 -translate-x-1/2 text-center z-10">
         <p className="text-[#208d60] text-2xl font-bold">
           {totalKg.toLocaleString()} KG
         </p>
@@ -32,10 +35,11 @@ function PieChartKilos({ totalKg }) {
           <Pie
             data={data}
             dataKey="value"
-            nameKey="name"
-            innerRadius={70}
-            outerRadius={100}
-            strokeWidth={0}
+            startAngle={180}
+            endAngle={0}
+            innerRadius={60}
+            outerRadius={80}
+            stroke="none"
             isAnimationActive={true}
           />
         </PieChart>

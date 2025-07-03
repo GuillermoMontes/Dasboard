@@ -10,7 +10,7 @@ import {
 
 function BarChartFamilia({ data }) {
   return (
-    <div className="bg-white rounded-xl p-3 shadow-md w-full h-[200px] border border-gray-200">
+    <div className="bg-white rounded-xl p-3 my-2 shadow-md w-full h-[450px] border border-gray-200">
       <h3 className="text-sm font-semibold text-gray-600 mb-2 text-center">
         Kilos por Familia
       </h3>
