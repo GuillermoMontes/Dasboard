@@ -5,7 +5,7 @@ import PieChartKilos from "@/components/PieChartKilos.jsx";
 import BarChartFamilia from "@/components/BarChartFamilia";
 import TablaSalidas from "@/components/TablaSalidas";
 import StatsPanel from "@/components/StatsPanel";
-import "../src/app.css";
+import ".app.css";
 
 function App() {
   const [activeStat, setActiveStat] = useState("Programado");
